@@ -39,7 +39,11 @@
 
       <q-card-actions align="right">
         <q-btn color="red" @click="iniciarNavegacao(hole)" icon="gps_fixed">Abrir no mapa</q-btn>
-        <q-btn color="secondary" label="Concluir" icon="done"></q-btn>
+        <q-btn
+          v-if="hole.status !== 'FECHADO'"
+          color="secondary"
+          label="Concluir"
+          @click="concluirBuraco(hole)" icon="done"></q-btn>
       </q-card-actions>
     </q-card>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
@@ -68,6 +72,22 @@ export default {
       const { latitude, longitude } = hole;
       const url = `http://www.google.com/maps/place/${latitude},${longitude}`;
       window.open(url, '_blank', 'location=yes');
+    },
+    concluirBuraco(hole) {
+      this.$q.loading.show();
+      this.$axios.put(`/hole-locations/${hole.id}`, { status: 'FECHADO' })
+        .then(() => {
+          this.$q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'cloud_done',
+            message: 'Concluído com sucesso',
+          });
+        })
+        .finally(() => {
+          this.$q.loading.hide();
+          this.$emit('ATUALIZA_BURACOS');
+        });
     },
     createHole() {
       this.$router.push({ name: 'cadastroBuraco' });

@@ -2,6 +2,7 @@ package br.com.holelocations.repository;
 
 import br.com.holelocations.entities.HoleLocation;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBSaveExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
@@ -35,12 +36,18 @@ public class HoleLocationRepository {
     }
 
     public String update(String id, HoleLocation holeLocation) {
-        dynamoDBMapper.save(holeLocation,
-                new DynamoDBSaveExpression()
-                        .withExpectedEntry("id",
-                                new ExpectedAttributeValue(
-                                        new AttributeValue().withS(id)
-                                )));
+//        dynamoDBMapper.save(holeLocation,
+//                new DynamoDBSaveExpression()
+//                        .withExpectedEntry("id",
+//                                new ExpectedAttributeValue(
+//                                        new AttributeValue().withS(id)
+//                                )));
+        DynamoDBMapperConfig dynamoDBMapperConfig = new DynamoDBMapperConfig
+                .Builder()
+                .withConsistentReads(DynamoDBMapperConfig.ConsistentReads.CONSISTENT)
+                .withSaveBehavior(DynamoDBMapperConfig.SaveBehavior.UPDATE_SKIP_NULL_ATTRIBUTES)
+                .build();
+        dynamoDBMapper.save(holeLocation, dynamoDBMapperConfig);
         return id;
     }
 

@@ -25,7 +25,7 @@
       </q-tab-panel>
 
       <q-tab-panel name="buracos">
-        <buracos :holes="holes"/>
+        <buracos @ATUALIZA_BURACOS="getAllHoles" :holes="holes"/>
       </q-tab-panel>
     </q-tab-panels>
     <!-- </q-page-container> -->
