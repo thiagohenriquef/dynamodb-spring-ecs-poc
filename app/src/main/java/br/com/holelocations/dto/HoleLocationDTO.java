@@ -19,7 +19,7 @@ public class HoleLocationDTO {
     private String id;
     private BigDecimal latitude;
     private BigDecimal longitude;
-    private Timestamp createdAt;
+    private String endereco;
     private User userCreation;
     private HoleStatus status;
     private HoleGravity gravity;
@@ -30,6 +30,7 @@ public class HoleLocationDTO {
         entity.setId(this.getId());
         entity.setLatitude(this.getLatitude());
         entity.setLongitude(this.getLongitude());
+        entity.setEndereco(this.getEndereco());
         entity.setUserCreation(this.getUserCreation());
         entity.setHoleGravity(this.getGravity());
         entity.setStatus(this.getStatus());
@@ -41,6 +42,7 @@ public class HoleLocationDTO {
         this.setId(entity.getId());
         this.setLatitude(entity.getLatitude());
         this.setLongitude(entity.getLongitude());
+        this.setEndereco(entity.getEndereco());
         this.setUserCreation(entity.getUserCreation());
         this.setGravity(entity.getHoleGravity());
         this.setStatus(entity.getStatus());

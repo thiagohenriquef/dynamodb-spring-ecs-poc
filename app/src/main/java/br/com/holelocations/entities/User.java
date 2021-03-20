@@ -19,5 +19,7 @@ public class User implements Serializable {
     private String name;
     @DynamoDBAttribute
     private String cpf;
+    @DynamoDBAttribute
+    private String phone;
 
 }
