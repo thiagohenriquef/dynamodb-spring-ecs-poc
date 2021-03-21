@@ -11,6 +11,9 @@
 
 module.exports = function (/* ctx */) {
   return {
+    bin: {
+      linuxAndroidStudio: "/snap/android-studio/current/android-studio/bin/studio.sh"
+    },
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
 
@@ -166,6 +169,8 @@ module.exports = function (/* ctx */) {
     // Full list of options: https://quasar.dev/quasar-cli/developing-capacitor-apps/configuring-capacitor
     capacitor: {
       hideSplashscreen: true,
+      backButtonExit: true,
+      backButton: true,
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-electron-apps/configuring-electron
