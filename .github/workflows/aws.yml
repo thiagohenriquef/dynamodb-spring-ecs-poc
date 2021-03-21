@@ -76,7 +76,7 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: task-definition.json
-        container-name: container-registry
+        container-name: ecr-task-definition
         image: ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
@@ -84,5 +84,5 @@ jobs:
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: hole-locations-service
-        cluster: hole-locations
+        cluster: hole-locations-cluster
         wait-for-service-stability: true
