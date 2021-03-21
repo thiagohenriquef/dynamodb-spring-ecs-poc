@@ -1,0 +1,8 @@
+{
+  "appId": "br.com.holelocations",
+  "appName": "Hole Locations",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "linuxAndroidStudioPath": "/snap/bin/android-studio"
+}
