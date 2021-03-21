@@ -59,18 +59,15 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to Amazon ECR
-      id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: hole-locations
-        # ECR_REPOSITORY: 911244548696.dkr.ecr.sa-east-1.amazonaws.com/holelocations
+        ECR_REPOSITORY: holelocations
         IMAGE_TAG: ${{ github.sha }}
       run: |
         echo "--------------------------- Gerando build ----------------------------------------"
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg ACCESS_KEY=${{ secrets.ENV_AWS_ACCESSKEY }} --build-arg AWS_SECRETKEY=${{ secrets.ENV_AWS_SECRETKEY }} .
+        docker build --build-arg ACCESS_KEY=${{ secrets.ENV_AWS_ACCESSKEY }} --build-arg AWS_SECRETKEY=${{ secrets.ENV_AWS_SECRETKEY }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         echo "--------------------------- Push to ECR ----------------------------------------"
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
