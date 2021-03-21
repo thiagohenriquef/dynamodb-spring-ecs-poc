@@ -29,7 +29,7 @@
       "memoryReservation": 983,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "911244548696.dkr.ecr.sa-east-1.amazonaws.com/holelocations",
+      "image": "911244548696.dkr.ecr.sa-east-1.amazonaws.com/holelocations:latest",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -46,7 +46,7 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "name": "hole-locations-container"
+      "name": "container-registry"
     }
   ],
   "placementConstraints": [],
@@ -55,8 +55,8 @@
   "compatibilities": [
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:sa-east-1:911244548696:task-definition/task-hole-locations:1",
-  "family": "task-hole-locations",
+  "taskDefinitionArn": "arn:aws:ecs:sa-east-1:911244548696:task-definition/task-deploy:1",
+  "family": "task-deploy",
   "requiresAttributes": [
     {
       "targetId": null,
