@@ -1,0 +1,14 @@
+FROM adoptopenjdk/openjdk11:latest
+RUN apk --no-cache add curl
+
+VOLUME /tmp
+
+ARG REGION_ARG=sa-east-1
+ARG ENV_AWS_ACCESSKEY
+ARG ENV_AWS_SECRETKEY
+ENV AWS_REGION=$REGION_ARG
+ENV AWS_ACCESS_KEY=$ENV_AWS_ACCESSKEY
+ENV AWS_SECRET_KEY=$ENV_AWS_SECRETKEY
+ARG JAR_FILE=app/target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
