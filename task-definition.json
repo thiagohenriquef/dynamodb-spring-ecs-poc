@@ -5,7 +5,15 @@
     {
       "dnsSearchDomains": null,
       "environmentFiles": null,
-      "logConfiguration": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+            "awslogs-group": "/ecs/ec2-hole-locations",
+            "awslogs-region": "sa-east-1",
+            "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": null
+      },
       "entryPoint": null,
       "portMappings": [
         {
@@ -25,11 +33,11 @@
       "workingDirectory": null,
       "secrets": null,
       "dockerSecurityOptions": null,
-      "memory": null,
-      "memoryReservation": 500,
+      "memory": 500,
+      "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "911244548696.dkr.ecr.sa-east-1.amazonaws.com/holelocations",
+      "image": "911244548696.dkr.ecr.sa-east-1.amazonaws.com/holelocations:latest",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -52,34 +60,14 @@
   "placementConstraints": [],
   "memory": null,
   "taskRoleArn": null,
-  "compatibilities": [
-    "EC2"
-  ],
-  "taskDefinitionArn": "arn:aws:ecs:sa-east-1:911244548696:task-definition/hole-locations-task:1",
   "family": "hole-locations-task",
-  "requiresAttributes": [
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.ecr-auth"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
-    }
-  ],
   "pidMode": null,
   "requiresCompatibilities": [
     "EC2"
   ],
   "networkMode": "bridge",
-  "cpu": null,
-  "revision": 1,
-  "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
-  "volumes": []
+  "volumes": [],
+  "cpu": "450"
 }
