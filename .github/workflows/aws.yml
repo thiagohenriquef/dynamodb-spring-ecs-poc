@@ -69,19 +69,20 @@ jobs:
         docker build --build-arg ACCESS_KEY=${{ secrets.ENV_AWS_ACCESSKEY }} --build-arg AWS_SECRETKEY=${{ secrets.ENV_AWS_SECRETKEY }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         echo "--------------------------- Push to ECR ----------------------------------------"
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: task-definition.json
-        container-name: sample-app
+        container-name: hole-locations-container
         image: ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: sample-app-service
-        cluster: default
+        service: hole-locations-service
+        cluster: hole-locations
         wait-for-service-stability: true
