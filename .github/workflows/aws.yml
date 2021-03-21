@@ -83,6 +83,6 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: hole-locations-service
+        service: hole-locations
         cluster: hole-locations
         wait-for-service-stability: true
