@@ -62,7 +62,8 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: 911244548696.dkr.ecr.sa-east-1.amazonaws.com/holelocations
+        ECR_REPOSITORY: hole-locations
+        # ECR_REPOSITORY: 911244548696.dkr.ecr.sa-east-1.amazonaws.com/holelocations
         IMAGE_TAG: ${{ github.sha }}
       run: |
         echo "--------------------------- Gerando build ----------------------------------------"
